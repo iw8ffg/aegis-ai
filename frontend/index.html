@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis AI - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aegis AI</h1>
+            <p>Intelligenza Predittiva per la Resilienza Territoriale</p>
+        </header>
+
+        <main>
+            <div class="column" id="knowledge-base">
+                <h2>📚 Base di Conoscenza</h2>
+                <form id="upload-form">
+                    <label for="file-input">Carica un documento PDF per istruire il sistema:</label>
+                    <input type="file" id="file-input" name="file" accept=".pdf" required>
+                    <button type="submit">Carica e Addestra</button>
+                </form>
+                <div class="status" id="upload-status"></div>
+            </div>
+
+            <div class="column" id="chat-interface">
+                <h2>💬 Interroga il Sistema</h2>
+                <div id="chat-history"></div>
+                <div id="input-area">
+                    <input type="text" id="question-input" placeholder="Fai una domanda...">
+                    <button id="ask-button">Invia</button>
+                </div>
+            </div>
+
+            <div class="column" id="reporting">
+                <h2>📊 Reportistica</h2>
+                <p>Il contenuto della chat attuale sarà usato per generare il report.</p>
+                <button id="generate-report-btn">Genera Report PDF</button>
+                <div class="status" id="report-status"></div>
+                
+                <div id="email-section" class="hidden">
+                    <h3>Inoltra Report via Email</h3>
+                    <input type="email" id="email-recipient" placeholder="Email del destinatario">
+                    <button id="send-email-btn">Invia Email</button>
+                    <div class="status" id="email-status"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
