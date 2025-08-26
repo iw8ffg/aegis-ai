@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Servizio Backend (API + Core AI)
+  backend:
+    build: ./backend
+    container_name: aegis_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/documents:/app/documents_storage
+    env_file:
+      - .env
+    depends_on:
+      - database
+      - elasticsearch
+
+  # Servizio Frontend (Interfaccia Web)
+  frontend:
+    build: ./frontend
+    container_name: aegis_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  # Database PostgreSQL con PostGIS
+  database:
+    image: postgis/postgis:13-3.1
+    container_name: aegis_database
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./data/postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Elasticsearch per la ricerca testuale
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+    container_name: aegis_elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ./data/elastic_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+
+volumes:
+  postgres_data:
+  elastic_data:
