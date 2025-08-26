@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+python-multipart
+langchain
+langchain-community
+langchain-openai  # Usiamo OpenAI per l'esempio, può essere sostituito
+pypdf
+faiss-cpu
+python-dotenv
+weasyprint
