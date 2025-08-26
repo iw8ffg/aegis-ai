@@ -1,15 +1,8 @@
-# Fase 1: Build dell'applicazione React/Vue
-FROM node:18 as build
-
-WORKDIR /app
-COPY package.json .
-RUN npm install
-COPY . .
-RUN npm run build
-
-# Fase 2: Servire l'applicazione con Nginx
+# Usa un'immagine Nginx leggera per servire i file statici
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+
+# Copia i file del frontend nella cartella di default di Nginx
+COPY . /usr/share/nginx/html
 
 # Esponi la porta 80
 EXPOSE 80
