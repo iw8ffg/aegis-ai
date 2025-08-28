@@ -3,8 +3,10 @@ uvicorn[standard]
 python-multipart
 langchain
 langchain-community
-langchain-openai  # Usiamo OpenAI per l'esempio, può essere sostituito
+langchain-openai
 pypdf
 faiss-cpu
 python-dotenv
 weasyprint
+psycopg2-binary
+SQLAlchemy
